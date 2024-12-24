@@ -50,3 +50,6 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# vscodeの設定ファイル類除外
+.vscode/
