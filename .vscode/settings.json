@@ -1,0 +1,9 @@
+{
+    "editor.formatOnType": true,
+    "[commonlisp]": {
+        "editor.wordSeparators": "`|;:'\",()"
+    },
+    "code-runner.executorMap": {
+        "c": "cd $dir && mkdir -p bin && gcc $fileName -o bin/$fileNameWithoutExt && bin/$fileNameWithoutExt"
+    }
+}
