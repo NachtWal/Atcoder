@@ -1,6 +1,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+int cmpnum(const void * n1, const void * n2)
+{
+    if (*(int *)n1 > *(int *)n2)
+    {
+        return -1;
+    }
+    else if (*(int *)n1 < *(int *)n2)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
 int main()
 {
     int N;
@@ -8,8 +24,7 @@ int main()
     int* a;
     int *b;
     a = (int *)malloc(sizeof(int) * N);
-    b = (int *)malloc(sizeof(int) * N);
-    if (a == NULL || b == NULL)
+    if (a == NULL)
     {
         exit(0);
     }
@@ -19,21 +34,7 @@ int main()
         scanf("%d", &a[i]);
     }
 
-    for (int j = 0; j < N; j++)
-    {
-        int index = j;
-        int x = a[j];
-        for (int k = 0; k < N; k++)
-        {
-            if (x < a[k])
-            {
-                x = a[k];
-                index = k;
-            }
-        }
-        b[j] = x;
-        a[index] = 0;
-    }
+    qsort(a, N, sizeof(int), cmpnum);
 
     int alice = 0;
     int bob = 0;
@@ -41,17 +42,17 @@ int main()
     {
         for (int i = 0; i < N / 2; i++)
         {
-            alice += b[2*i];
-            bob += b[2*i + 1];
+            alice += a[2*i];
+            bob += a[2*i + 1];
         }
     }else
     {
         for (int i = 0; i < N / 2; i++)
         {
-            alice += b[2*i];
-            bob += b[2*i + 1];
+            alice += a[2*i];
+            bob += a[2*i + 1];
         }
-        alice += b[N - 1];
+        alice += a[N - 1];
     }
     printf("%d", alice - bob);
 }
